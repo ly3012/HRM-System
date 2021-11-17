@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 17, 2021 lúc 11:11 AM
+-- Thời gian đã tạo: Th10 17, 2021 lúc 11:25 AM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
 -- Phiên bản PHP: 8.0.12
 
@@ -191,19 +191,20 @@ INSERT INTO `employees` (`id`, `employee_id`, `firstname`, `lastname`, `address`
 (15, 'CAB835624170', 'Mia', 'Hollister', 'Test', '1995-07-18', '9632145655', 'Female', 2, 3, 'profile.jpg', '2021-11-13'),
 (16, 'MGZ312906745', 'Emily', 'JK', 'Test', '1996-07-24', '9876543210', 'Female', 2, 3, 'profile.jpg', '2021-11-13'),
 (17, 'HSP067892134', 'Nakia', 'Grey', 'Test', '1995-10-24', '8467067344', 'Female', 1, 2, 'profile.jpg', '2021-11-13'),
-(18, 'BVH081749563', 'Dave', 'Cruze', 'Demo', '1990-01-02', '5454578965', 'Male', 2, 2, 'profile.jpg', '2021-11-13'),
+(18, 'BVH081749563', 'Dave', 'Cruze', 'Demo', '1990-01-02', '5454578965', 'Male', 2, 2, 'flower2.jpg', '2021-11-13'),
 (19, 'ZTC714069832', 'Logan', 'Paul', 'Esp 16', '1994-12-30', '0202121255', 'Male', 1, 1, 'profile.jpg', '2021-11-13'),
 (20, 'VFT157620348', 'Jack', 'Adler', 'Test', '1991-07-25', '6545698880', 'Male', 1, 4, 'profile.jpg', '2021-11-13'),
 (21, 'XRF342608719', 'Mason', 'Beckett', 'Demo', '1996-07-24', '8467067344', 'Male', 2, 1, 'profile.jpg', '2021-11-13'),
 (22, 'LVO541238690', 'Lucas', 'Cooper', 'Demo', '1995-07-18', '9632145655', 'Male', 2, 1, 'profile.jpg', '2021-11-13'),
-(23, 'AEI036154829', 'Alex', 'Cohen', 'Demo', '1995-08-23', '9632145655', 'Male', 1, 2, 'profile.jpg', '2021-11-13'),
+(23, 'AEI036154829', 'Alex', 'Cohen', 'Demo', '1995-08-23', '9632145655', 'Male', 1, 2, 'cat5.jpg', '2021-11-13'),
 (24, 'EKS183702645', 'Phuong', 'Nam', 'Cau Giay\r\nPham Van Dong,Mai Dich', '2001-12-08', '', 'Female', 3, 4, '16e464c0cab9851c52eed6688889bc25.jpg', '2021-11-13'),
 (25, 'XBY970824136', 'Phung', 'Ly', 'Cau Giay\r\nPham Van Dong,Mai Dich', '2001-02-16', '0367673', 'Female', 2, 1, 'original (6).jpg', '2021-11-13'),
 (26, 'AVY301224121', 'Phuong', 'Thao', 'Ha Noi-VietNam', '2001-10-21', '', 'Female', 2, 1, 'girl1.jpg', '2021-11-13'),
 (27, 'RMS014526973', 'Phuong', 'Thao', 'Ha Noi', '2001-10-21', 'xxxxxxx', 'Female', 2, 1, '@_marryz profile on Instagram • 118 posts.jpg', '2021-11-13'),
 (28, 'AXQ301224121', 'Hong', 'Ha', 'Nam Dinh', '1997-08-25', '', 'Female', 2, 2, 'girl3.jpg', '2021-11-17'),
 (29, 'AVQ301224121', 'Ha', 'Huy', 'Nghe An', '1999-10-28', '', 'Male', 2, 3, 'a.jpg', '2021-11-17'),
-(30, 'ACE123456789', 'Kim', 'Taehyung', 'Daegu,Korea', '1995-12-30', '', 'Male', 2, 2, 'male3.jpg', '2021-11-17');
+(30, 'ACE123456789', 'Kim', 'Taehyung', 'Daegu,Korea', '1995-12-30', '', 'Male', 2, 2, 'V4.jpg', '2021-11-17'),
+(31, 'AAB123456789', 'Phuong', 'Nam', 'Nam Dinh', '2001-12-08', '', 'Female', 3, 3, 'girl24.jpg', '2021-11-04');
 
 -- --------------------------------------------------------
 
@@ -355,7 +356,7 @@ ALTER TABLE `deductions`
 -- AUTO_INCREMENT cho bảng `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT cho bảng `overtime`
