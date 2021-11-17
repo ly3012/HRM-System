@@ -1,68 +1,67 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.11
--- http://www.phpmyadmin.net
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 11, 2018 at 08:21 PM
--- Server version: 5.6.21
--- PHP Version: 5.6.3
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th10 17, 2021 lúc 11:11 AM
+-- Phiên bản máy phục vụ: 10.4.21-MariaDB
+-- Phiên bản PHP: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `apsystem`
+-- Cơ sở dữ liệu: `apsystem`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Cấu trúc bảng cho bảng `admin`
 --
 
-CREATE TABLE IF NOT EXISTS `admin` (
-`id` int(11) NOT NULL,
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
   `username` varchar(30) NOT NULL,
   `password` varchar(60) NOT NULL,
   `firstname` varchar(50) NOT NULL,
   `lastname` varchar(50) NOT NULL,
   `photo` varchar(200) NOT NULL,
   `created_on` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `admin`
+-- Đang đổ dữ liệu cho bảng `admin`
 --
 
 INSERT INTO `admin` (`id`, `username`, `password`, `firstname`, `lastname`, `photo`, `created_on`) VALUES
-(1, 'admin', '$2y$10$fCOiMky4n5hCJx3cpsG20Od4wHtlkCLKmO6VLobJNRIg9ooHTkgjK', 'Harry', 'Den', 'admin.png', '2018-04-30');
+(1, 'ly3012', '$2y$10$fCOiMky4n5hCJx3cpsG20Od4wHtlkCLKmO6VLobJNRIg9ooHTkgjK', 'Phung', 'Ly', 'girl8.jpg', '2021-11-03');
 
-INSERT INTO `admin` (`id`, `username`, `password`, `firstname`, `lastname`, `photo`, `created_on`) VALUES
-(2, 'ly3012', '$2y$10$fCOiMky4n5hCJx3cpsG20Od4wHtlkCLKmO6VLobJNRIg9ooHTkgjK', 'Ly', 'Phung', 'admin.png', '2018-04-30');
 -- --------------------------------------------------------
 
 --
--- Table structure for table `attendance`
+-- Cấu trúc bảng cho bảng `attendance`
 --
 
-CREATE TABLE IF NOT EXISTS `attendance` (
-`id` int(11) NOT NULL,
+CREATE TABLE `attendance` (
+  `id` int(11) NOT NULL,
   `employee_id` int(11) NOT NULL,
   `date` date NOT NULL,
   `time_in` time NOT NULL,
   `status` int(1) NOT NULL,
   `time_out` time NOT NULL,
   `num_hr` double NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `attendance`
+-- Đang đổ dữ liệu cho bảng `attendance`
 --
 
 INSERT INTO `attendance` (`id`, `employee_id`, `date`, `time_in`, `status`, `time_out`, `num_hr`) VALUES
@@ -102,60 +101,61 @@ INSERT INTO `attendance` (`id`, `employee_id`, `date`, `time_in`, `status`, `tim
 (102, 20, '2018-07-12', '23:52:48', 1, '00:00:00', 0),
 (103, 21, '2018-07-12', '23:54:50', 1, '00:00:00', 0),
 (104, 22, '2018-07-12', '23:56:02', 1, '00:00:00', 0),
-(105, 23, '2018-07-12', '13:57:00', 0, '00:00:00', 12.95);
+(105, 23, '2018-07-12', '13:57:00', 0, '00:00:00', 12.95),
+(106, 22, '2021-11-16', '23:32:54', 1, '21:13:59', 6.5333333333333),
+(107, 18, '2021-11-17', '16:12:06', 0, '00:00:00', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cashadvance`
+-- Cấu trúc bảng cho bảng `cashadvance`
 --
 
-CREATE TABLE IF NOT EXISTS `cashadvance` (
-`id` int(11) NOT NULL,
+CREATE TABLE `cashadvance` (
+  `id` int(11) NOT NULL,
   `date_advance` date NOT NULL,
   `employee_id` varchar(15) NOT NULL,
   `amount` double NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `cashadvance`
+-- Đang đổ dữ liệu cho bảng `cashadvance`
 --
 
 INSERT INTO `cashadvance` (`id`, `date_advance`, `employee_id`, `amount`) VALUES
-(2, '2018-05-02', '1', 1000),
 (3, '2018-05-02', '1', 1000),
 (4, '2018-07-12', '5', 3500);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `deductions`
+-- Cấu trúc bảng cho bảng `deductions`
 --
 
-CREATE TABLE IF NOT EXISTS `deductions` (
-`id` int(11) NOT NULL,
+CREATE TABLE `deductions` (
+  `id` int(11) NOT NULL,
   `description` varchar(100) NOT NULL,
   `amount` double NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `deductions`
+-- Đang đổ dữ liệu cho bảng `deductions`
 --
 
 INSERT INTO `deductions` (`id`, `description`, `amount`) VALUES
-(1, 'SSS', 100),
-(2, 'Pagibig', 150),
-(3, 'PhilHealth', 150),
+(1, 'Health insurance', 100),
+(2, 'Personal income', 0),
+(3, 'Accident insurance', 100),
 (4, 'Project Issues', 1500);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `employees`
+-- Cấu trúc bảng cho bảng `employees`
 --
 
-CREATE TABLE IF NOT EXISTS `employees` (
-`id` int(11) NOT NULL,
+CREATE TABLE `employees` (
+  `id` int(11) NOT NULL,
   `employee_id` varchar(15) NOT NULL,
   `firstname` varchar(50) NOT NULL,
   `lastname` varchar(50) NOT NULL,
@@ -167,52 +167,60 @@ CREATE TABLE IF NOT EXISTS `employees` (
   `schedule_id` int(11) NOT NULL,
   `photo` varchar(200) NOT NULL,
   `created_on` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `employees`
+-- Đang đổ dữ liệu cho bảng `employees`
 --
 
 INSERT INTO `employees` (`id`, `employee_id`, `firstname`, `lastname`, `address`, `birthdate`, `contact_info`, `gender`, `position_id`, `schedule_id`, `photo`, `created_on`) VALUES
-(1, 'ABC123456789', 'Christine', 'Smith', 'Brgy. Mambulac, Silay City', '2018-04-02', '09000035719', 'Female', 1, 2, 'desktop.jpg', '2018-04-28'),
-(3, 'DYE473869250', 'Julyn', 'Divinagracia', 'E.B. Magalona', '1992-05-02', '09123456789', 'Female', 2, 2, '', '2018-04-30'),
-(4, 'JIE625973480', 'Gemalyn', 'Cepe', 'Carmen, Bohol', '1995-10-02', '09468029840', 'Female', 2, 3, '', '2018-04-30'),
-(5, 'TQO238109674', 'Bruno', 'Den', 'Test', '1995-08-23', '5454578965', 'Male', 1, 2, 'thanossmile.jpg', '2018-07-11'),
-(6, 'EDQ203874591', 'Henry', 'Doe', 'New St. Esp', '1991-07-25', '9876543210', 'Male', 2, 4, 'male.png', '2018-07-11'),
-(7, 'TWY781946302', 'Johnny', 'Jr', 'Esp', '1995-07-11', '8467067344', 'Male', 1, 2, 'profile.jpg', '2018-07-11'),
-(8, 'GWZ071342865', 'Tonny', 'Jr', 'Esp 12 South Street', '1994-07-19', '9876543210', 'Male', 1, 2, 'profile.jpg', '2018-07-11'),
-(9, 'HEL079321846', 'Jacob', 'Carter', 'St12 N1', '1995-07-18', '5454578965', 'Male', 1, 2, 'profile.jpg', '2018-07-11'),
-(10, 'OCN273564901', 'Benjamin', 'Cohen', 'TEST', '1991-07-25', '78548852145', 'Male', 2, 3, 'profile.jpg', '2018-07-11'),
-(11, 'PGX413705682', 'Ethan', 'Carson', 'DEMO', '1994-07-19', '8467067344', 'Male', 1, 2, 'profile.jpg', '2018-07-11'),
-(12, 'YWX536478912', 'Daniel', 'Cooper', 'Test', '1995-07-11', '9876543210', 'Male', 2, 4, 'profile.jpg', '2018-07-11'),
-(13, 'ALB590623481', 'Emma', 'Wallis', 'Test', '1994-07-19', '9632145655', 'Female', 1, 3, 'female4.jpg', '2018-07-11'),
-(14, 'IOV153842976', 'Sophia', 'Maguire', 'Test', '1995-07-11', '5454578965', 'Female', 2, 2, 'profile.jpg', '2018-07-11'),
-(15, 'CAB835624170', 'Mia', 'Hollister', 'Test', '1995-07-18', '9632145655', 'Female', 2, 3, 'profile.jpg', '2018-07-11'),
-(16, 'MGZ312906745', 'Emily', 'JK', 'Test', '1996-07-24', '9876543210', 'Female', 2, 3, 'profile.jpg', '2018-07-11'),
-(17, 'HSP067892134', 'Nakia', 'Grey', 'Test', '1995-10-24', '8467067344', 'Female', 1, 2, 'profile.jpg', '2018-07-11'),
-(18, 'BVH081749563', 'Dave', 'Cruze', 'Demo', '1990-01-02', '5454578965', 'Male', 2, 2, 'profile.jpg', '2018-07-11'),
-(19, 'ZTC714069832', 'Logan', 'Paul', 'Esp 16', '1994-12-30', '0202121255', 'Male', 1, 1, 'profile.jpg', '2018-07-11'),
-(20, 'VFT157620348', 'Jack', 'Adler', 'Test', '1991-07-25', '6545698880', 'Male', 1, 4, 'profile.jpg', '2018-07-11'),
-(21, 'XRF342608719', 'Mason', 'Beckett', 'Demo', '1996-07-24', '8467067344', 'Male', 2, 1, 'profile.jpg', '2018-07-11'),
-(22, 'LVO541238690', 'Lucas', 'Cooper', 'Demo', '1995-07-18', '9632145655', 'Male', 2, 1, 'profile.jpg', '2018-07-11'),
-(23, 'AEI036154829', 'Alex', 'Cohen', 'Demo', '1995-08-23', '9632145655', 'Male', 1, 2, 'profile.jpg', '2018-07-11');
+(1, 'ABC123456789', 'Phung ', 'Ly', 'Cau Giay\r\nPham Van Dong,Mai Dich', '2001-02-16', '', 'Female', 1, 2, 'girl8.jpg', '2021-11-08'),
+(2, 'AVQ301224121', 'Manh', 'Quan', 'Hue', '1995-09-24', 'xxx', 'Male', 2, 2, 'cat1.jpg', '2021-11-17'),
+(3, 'DYE473869250', 'Julyn', 'Divinagracia', 'E.B. Magalona', '1992-05-02', '09123456789', 'Female', 2, 2, '', '2021-11-13'),
+(4, 'JIE625973480', 'Gemalyn', 'Cepe', 'Carmen, Bohol', '1995-10-02', '09468029840', 'Female', 2, 3, '', '2021-11-13'),
+(5, 'TQO238109674', 'Bruno', 'Den', 'Test', '1995-08-23', '5454578965', 'Male', 1, 2, 'thanossmile.jpg', '2021-11-13'),
+(6, 'EDQ203874591', 'Henry', 'Doe', 'New St. Esp', '1991-07-25', '9876543210', 'Male', 2, 4, 'male.png', '2021-11-13'),
+(7, 'TWY781946302', 'Johnny', 'Jr', 'Esp', '1995-07-11', '8467067344', 'Male', 1, 2, 'profile.jpg', '2021-11-13'),
+(8, 'GWZ071342865', 'Tonny', 'Jr', 'Esp 12 South Street', '1994-07-19', '9876543210', 'Male', 1, 2, 'profile.jpg', '2021-11-13'),
+(9, 'HEL079321846', 'Jacob', 'Carter', 'St12 N1', '1995-07-18', '5454578965', 'Male', 1, 2, 'profile.jpg', '2021-11-13'),
+(10, 'OCN273564901', 'Benjamin', 'Cohen', 'TEST', '1991-07-25', '78548852145', 'Male', 2, 3, 'profile.jpg', '2021-11-13'),
+(11, 'PGX413705682', 'Ethan', 'Carson', 'DEMO', '1994-07-19', '8467067344', 'Male', 1, 2, 'profile.jpg', '2021-11-13'),
+(12, 'YWX536478912', 'Daniel', 'Cooper', 'Test', '1995-07-11', '9876543210', 'Male', 2, 4, 'profile.jpg', '2021-11-13'),
+(13, 'ALB590623481', 'Emma', 'Wallis', 'Test', '1994-07-19', '9632145655', 'Female', 1, 3, 'female4.jpg', '2021-11-13'),
+(14, 'IOV153842976', 'Sophia', 'Maguire', 'Test', '1995-07-11', '5454578965', 'Female', 2, 2, 'profile.jpg', '2021-11-13'),
+(15, 'CAB835624170', 'Mia', 'Hollister', 'Test', '1995-07-18', '9632145655', 'Female', 2, 3, 'profile.jpg', '2021-11-13'),
+(16, 'MGZ312906745', 'Emily', 'JK', 'Test', '1996-07-24', '9876543210', 'Female', 2, 3, 'profile.jpg', '2021-11-13'),
+(17, 'HSP067892134', 'Nakia', 'Grey', 'Test', '1995-10-24', '8467067344', 'Female', 1, 2, 'profile.jpg', '2021-11-13'),
+(18, 'BVH081749563', 'Dave', 'Cruze', 'Demo', '1990-01-02', '5454578965', 'Male', 2, 2, 'profile.jpg', '2021-11-13'),
+(19, 'ZTC714069832', 'Logan', 'Paul', 'Esp 16', '1994-12-30', '0202121255', 'Male', 1, 1, 'profile.jpg', '2021-11-13'),
+(20, 'VFT157620348', 'Jack', 'Adler', 'Test', '1991-07-25', '6545698880', 'Male', 1, 4, 'profile.jpg', '2021-11-13'),
+(21, 'XRF342608719', 'Mason', 'Beckett', 'Demo', '1996-07-24', '8467067344', 'Male', 2, 1, 'profile.jpg', '2021-11-13'),
+(22, 'LVO541238690', 'Lucas', 'Cooper', 'Demo', '1995-07-18', '9632145655', 'Male', 2, 1, 'profile.jpg', '2021-11-13'),
+(23, 'AEI036154829', 'Alex', 'Cohen', 'Demo', '1995-08-23', '9632145655', 'Male', 1, 2, 'profile.jpg', '2021-11-13'),
+(24, 'EKS183702645', 'Phuong', 'Nam', 'Cau Giay\r\nPham Van Dong,Mai Dich', '2001-12-08', '', 'Female', 3, 4, '16e464c0cab9851c52eed6688889bc25.jpg', '2021-11-13'),
+(25, 'XBY970824136', 'Phung', 'Ly', 'Cau Giay\r\nPham Van Dong,Mai Dich', '2001-02-16', '0367673', 'Female', 2, 1, 'original (6).jpg', '2021-11-13'),
+(26, 'AVY301224121', 'Phuong', 'Thao', 'Ha Noi-VietNam', '2001-10-21', '', 'Female', 2, 1, 'girl1.jpg', '2021-11-13'),
+(27, 'RMS014526973', 'Phuong', 'Thao', 'Ha Noi', '2001-10-21', 'xxxxxxx', 'Female', 2, 1, '@_marryz profile on Instagram • 118 posts.jpg', '2021-11-13'),
+(28, 'AXQ301224121', 'Hong', 'Ha', 'Nam Dinh', '1997-08-25', '', 'Female', 2, 2, 'girl3.jpg', '2021-11-17'),
+(29, 'AVQ301224121', 'Ha', 'Huy', 'Nghe An', '1999-10-28', '', 'Male', 2, 3, 'a.jpg', '2021-11-17'),
+(30, 'ACE123456789', 'Kim', 'Taehyung', 'Daegu,Korea', '1995-12-30', '', 'Male', 2, 2, 'male3.jpg', '2021-11-17');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `overtime`
+-- Cấu trúc bảng cho bảng `overtime`
 --
 
-CREATE TABLE IF NOT EXISTS `overtime` (
-`id` int(11) NOT NULL,
+CREATE TABLE `overtime` (
+  `id` int(11) NOT NULL,
   `employee_id` varchar(15) NOT NULL,
   `hours` double NOT NULL,
   `rate` double NOT NULL,
   `date_overtime` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `overtime`
+-- Đang đổ dữ liệu cho bảng `overtime`
 --
 
 INSERT INTO `overtime` (`id`, `employee_id`, `hours`, `rate`, `date_overtime`) VALUES
@@ -222,17 +230,17 @@ INSERT INTO `overtime` (`id`, `employee_id`, `hours`, `rate`, `date_overtime`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `position`
+-- Cấu trúc bảng cho bảng `position`
 --
 
-CREATE TABLE IF NOT EXISTS `position` (
-`id` int(11) NOT NULL,
+CREATE TABLE `position` (
+  `id` int(11) NOT NULL,
   `description` varchar(150) NOT NULL,
   `rate` double NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `position`
+-- Đang đổ dữ liệu cho bảng `position`
 --
 
 INSERT INTO `position` (`id`, `description`, `rate`) VALUES
@@ -244,17 +252,17 @@ INSERT INTO `position` (`id`, `description`, `rate`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `schedules`
+-- Cấu trúc bảng cho bảng `schedules`
 --
 
-CREATE TABLE IF NOT EXISTS `schedules` (
-`id` int(11) NOT NULL,
+CREATE TABLE `schedules` (
+  `id` int(11) NOT NULL,
   `time_in` time NOT NULL,
   `time_out` time NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `schedules`
+-- Đang đổ dữ liệu cho bảng `schedules`
 --
 
 INSERT INTO `schedules` (`id`, `time_in`, `time_out`) VALUES
@@ -264,101 +272,110 @@ INSERT INTO `schedules` (`id`, `time_in`, `time_out`) VALUES
 (4, '10:00:00', '19:00:00');
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `admin`
+-- Chỉ mục cho bảng `admin`
 --
 ALTER TABLE `admin`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `attendance`
+-- Chỉ mục cho bảng `attendance`
 --
 ALTER TABLE `attendance`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `cashadvance`
+-- Chỉ mục cho bảng `cashadvance`
 --
 ALTER TABLE `cashadvance`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `deductions`
+-- Chỉ mục cho bảng `deductions`
 --
 ALTER TABLE `deductions`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `employees`
+-- Chỉ mục cho bảng `employees`
 --
 ALTER TABLE `employees`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `overtime`
+-- Chỉ mục cho bảng `overtime`
 --
 ALTER TABLE `overtime`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `position`
+-- Chỉ mục cho bảng `position`
 --
 ALTER TABLE `position`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `schedules`
+-- Chỉ mục cho bảng `schedules`
 --
 ALTER TABLE `schedules`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT cho bảng `admin`
 --
 ALTER TABLE `admin`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
--- AUTO_INCREMENT for table `attendance`
+-- AUTO_INCREMENT cho bảng `attendance`
 --
 ALTER TABLE `attendance`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=106;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+
 --
--- AUTO_INCREMENT for table `cashadvance`
+-- AUTO_INCREMENT cho bảng `cashadvance`
 --
 ALTER TABLE `cashadvance`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
--- AUTO_INCREMENT for table `deductions`
+-- AUTO_INCREMENT cho bảng `deductions`
 --
 ALTER TABLE `deductions`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
--- AUTO_INCREMENT for table `employees`
+-- AUTO_INCREMENT cho bảng `employees`
 --
 ALTER TABLE `employees`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
 --
--- AUTO_INCREMENT for table `overtime`
+-- AUTO_INCREMENT cho bảng `overtime`
 --
 ALTER TABLE `overtime`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
--- AUTO_INCREMENT for table `position`
+-- AUTO_INCREMENT cho bảng `position`
 --
 ALTER TABLE `position`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
--- AUTO_INCREMENT for table `schedules`
+-- AUTO_INCREMENT cho bảng `schedules`
 --
 ALTER TABLE `schedules`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
