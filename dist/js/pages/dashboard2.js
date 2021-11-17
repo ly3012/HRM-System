@@ -2,15 +2,6 @@ $(function () {
 
   'use strict';
 
-  /* ChartJS
-   * -------
-   * Here we will create a few charts using ChartJS
-   */
-
-  // -----------------------
-  // - MONTHLY SALES CHART -
-  // -----------------------
-
   // Get context with jQuery - using jQuery's .get() method.
   var salesChartCanvas = $('#salesChart').get(0).getContext('2d');
   // This will get the first returned node in the jQuery collection.
@@ -84,14 +75,7 @@ $(function () {
   // Create the line chart
   salesChart.Line(salesChartData, salesChartOptions);
 
-  // ---------------------------
-  // - END MONTHLY SALES CHART -
-  // ---------------------------
-
-  // -------------
-  // - PIE CHART -
-  // -------------
-  // Get context with jQuery - using jQuery's .get() method.
+ 
   var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
   var pieChart       = new Chart(pieChartCanvas);
   var PieData        = [
@@ -228,14 +212,7 @@ $(function () {
     ]
   });
 
-  /* SPARKLINE CHARTS
-   * ----------------
-   * Create a inline charts with spark line
-   */
-
-  // -----------------
-  // - SPARKLINE BAR -
-  // -----------------
+  
   $('.sparkbar').each(function () {
     var $this = $(this);
     $this.sparkline('html', {

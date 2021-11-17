@@ -1,11 +1,4 @@
-/* TodoList()
- * =========
- * Converts a list into a todoList.
- *
- * @Usage: $('.my-list').todoList(options)
- *         or add [data-widget="todo-list"] to the ul element
- *         Pass any option as data-option="value"
- */
+
 +function ($) {
   'use strict'
 

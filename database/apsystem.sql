@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 17, 2021 lúc 11:25 AM
+-- Thời gian đã tạo: Th10 17, 2021 lúc 02:56 PM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
 -- Phiên bản PHP: 8.0.12
 
@@ -174,7 +174,7 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`id`, `employee_id`, `firstname`, `lastname`, `address`, `birthdate`, `contact_info`, `gender`, `position_id`, `schedule_id`, `photo`, `created_on`) VALUES
-(1, 'ABC123456789', 'Phung ', 'Ly', 'Cau Giay\r\nPham Van Dong,Mai Dich', '2001-02-16', '', 'Female', 1, 2, 'girl8.jpg', '2021-11-08'),
+(1, 'ABC123456789', 'Phung ', 'Ly', 'Cau Giay\r\nPham Van Dong,Mai Dich', '2001-02-16', '', 'Female', 2, 2, 'girl8.jpg', '2021-11-08'),
 (2, 'AVQ301224121', 'Manh', 'Quan', 'Hue', '1995-09-24', 'xxx', 'Male', 2, 2, 'cat1.jpg', '2021-11-17'),
 (3, 'DYE473869250', 'Julyn', 'Divinagracia', 'E.B. Magalona', '1992-05-02', '09123456789', 'Female', 2, 2, '', '2021-11-13'),
 (4, 'JIE625973480', 'Gemalyn', 'Cepe', 'Carmen, Bohol', '1995-10-02', '09468029840', 'Female', 2, 3, '', '2021-11-13'),
@@ -202,7 +202,7 @@ INSERT INTO `employees` (`id`, `employee_id`, `firstname`, `lastname`, `address`
 (26, 'AVY301224121', 'Phuong', 'Thao', 'Ha Noi-VietNam', '2001-10-21', '', 'Female', 2, 1, 'girl1.jpg', '2021-11-13'),
 (27, 'RMS014526973', 'Phuong', 'Thao', 'Ha Noi', '2001-10-21', 'xxxxxxx', 'Female', 2, 1, '@_marryz profile on Instagram • 118 posts.jpg', '2021-11-13'),
 (28, 'AXQ301224121', 'Hong', 'Ha', 'Nam Dinh', '1997-08-25', '', 'Female', 2, 2, 'girl3.jpg', '2021-11-17'),
-(29, 'AVQ301224121', 'Ha', 'Huy', 'Nghe An', '1999-10-28', '', 'Male', 2, 3, 'a.jpg', '2021-11-17'),
+(29, 'AVQ301224121', 'Ha', 'Huy', 'Nghe An', '1999-10-28', '', 'Male', 4, 3, 'male2.jpg', '2021-11-17'),
 (30, 'ACE123456789', 'Kim', 'Taehyung', 'Daegu,Korea', '1995-12-30', '', 'Male', 2, 2, 'V4.jpg', '2021-11-17'),
 (31, 'AAB123456789', 'Phuong', 'Nam', 'Nam Dinh', '2001-12-08', '', 'Female', 3, 3, 'girl24.jpg', '2021-11-04');
 

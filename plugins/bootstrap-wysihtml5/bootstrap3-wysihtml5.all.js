@@ -1,7 +1,4 @@
-// TODO: in future try to replace most inline compability checks with polyfills for code readability 
 
-// element.textContent polyfill.
-// Unsupporting browsers: IE8
 
 if (Object.defineProperty && Object.getOwnPropertyDescriptor && Object.getOwnPropertyDescriptor(Element.prototype, "textContent") && !Object.getOwnPropertyDescriptor(Element.prototype, "textContent").get) {
 	(function() {
@@ -26,14 +23,6 @@ if(!Array.isArray) {
   };
 };/**
  * @license wysihtml5x v0.4.15
- * https://github.com/Edicy/wysihtml5
- *
- * Author: Christopher Blum (https://github.com/tiff)
- * Secondary author of extended features: Oliver Pulges (https://github.com/pulges)
- *
- * Copyright (C) 2012 XING AG
- * Licensed under the MIT license (MIT)
- *
  */
 var wysihtml5 = {
   version: "0.4.15",
@@ -60,27 +49,13 @@ var wysihtml5 = {
   SPACE_KEY:      32,
   DELETE_KEY:     46
 };
-;/**
- * Rangy, a cross-browser JavaScript range and selection library
- * http://code.google.com/p/rangy/
- *
- * Copyright 2014, Tim Down
- * Licensed under the MIT license.
- * Version: 1.3alpha.20140804
- * Build date: 4 August 2014
- */
+;
 
 (function(factory, global) {
     if (typeof define == "function" && define.amd) {
         // AMD. Register as an anonymous module.
         define(factory);
-/*
-    TODO: look into this properly.
-    
-    } else if (typeof exports == "object") {
-        // Node/CommonJS style for Browserify
-        module.exports = factory;
-*/
+
     } else {
         // No AMD or CommonJS support so we place Rangy in a global variable
         global.rangy = factory();
@@ -89,12 +64,9 @@ var wysihtml5 = {
 
     var OBJECT = "object", FUNCTION = "function", UNDEFINED = "undefined";
 
-    // Minimal set of properties required for DOM Level 2 Range compliance. Comparison constants such as START_TO_START
-    // are omitted because ranges in KHTML do not have them but otherwise work perfectly well. See issue 113.
     var domRangeProperties = ["startContainer", "startOffset", "endContainer", "endOffset", "collapsed",
         "commonAncestorContainer"];
 
-    // Minimal set of methods required for DOM Level 2 Range compliance
     var domRangeMethods = ["setStart", "setStartBefore", "setStartAfter", "setEnd", "setEndBefore",
         "setEndAfter", "collapse", "selectNode", "selectNodeContents", "compareBoundaryPoints", "deleteContents",
         "extractContents", "cloneContents", "insertNode", "surroundContents", "cloneRange", "toString", "detach"];
@@ -107,8 +79,6 @@ var wysihtml5 = {
 
     /*----------------------------------------------------------------------------------------------------------------*/
 
-    // Trio of functions taken from Peter Michaux's article:
-    // http://peter.michaux.ca/articles/feature-detection-state-of-the-art-browser-scripting
     function isHostMethod(o, p) {
         var t = typeof o[p];
         return t == FUNCTION || (!!(t == OBJECT && o[p])) || t == "unknown";
@@ -122,7 +92,6 @@ var wysihtml5 = {
         return typeof o[p] != UNDEFINED;
     }
 
-    // Creates a convenience function to save verbose repeated calls to tests functions
     function createMultiplePropertyTest(testFunc) {
         return function(o, props) {
             var i = props.length;
@@ -538,9 +507,6 @@ var wysihtml5 = {
 
         /*----------------------------------------------------------------------------------------------------------------*/
 
-        // Removed use of indexOf because of a bizarre bug in Opera that is thrown in one of the Acid3 tests. I haven't been
-        // able to replicate it outside of the test. The bug is that indexOf returns -1 when called on an Array that
-        // contains just the document as a single element and the value searched for is the document.
         var arrayContains = /*Array.prototype.indexOf ?
             function(arr, val) {
                 return arr.indexOf(val) > -1;
@@ -762,7 +728,6 @@ var wysihtml5 = {
         }
 
         function comparePoints(nodeA, offsetA, nodeB, offsetB) {
-            // See http://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html#Level-2-Range-Comparing
             var nodeC, root, childA, childB, n;
             if (nodeA == nodeB) {
                 // Case 1: nodes are the same
@@ -779,7 +744,6 @@ var wysihtml5 = {
                     throw new Error("comparePoints error: nodes have no common ancestor");
                 }
 
-                // Case 4: containers are siblings or descendants of siblings
                 childA = (nodeA === root) ? root : getClosestAncestorIn(nodeA, root, true);
                 childB = (nodeB === root) ? root : getClosestAncestorIn(nodeB, root, true);
 
@@ -802,7 +766,6 @@ var wysihtml5 = {
 
         /*----------------------------------------------------------------------------------------------------------------*/
 
-        // Test for IE's crash (IE 6/7) or exception (IE >= 8) when a reference to garbage-collected text node is queried
         var crashyTextNodes = false;
 
         function isBrokenNode(node) {
@@ -1078,8 +1041,6 @@ var wysihtml5 = {
                         iteratorState.stop = true;
                         return;
                     } else {
-                        // The node is partially selected by the Range, so we can use a new RangeIterator on the portion of
-                        // the node selected by the Range.
                         subRangeIterator = rangeIterator.getSubtreeIterator();
                         iterateSubtree(subRangeIterator, func, iteratorState);
                         subRangeIterator.detach();
@@ -1088,8 +1049,6 @@ var wysihtml5 = {
                         }
                     }
                 } else {
-                    // The whole node is selected, so we can use efficient DOM iteration to iterate over the node and its
-                    // descendants
                     it = dom.createIterator(node);
                     while ( (n = it.next()) ) {
                         if (func(n) === false) {
@@ -1148,8 +1107,6 @@ var wysihtml5 = {
                 if (filterExists && !filter(node)) {
                     return;
                 }
-                // Don't include a boundary container if it is a character data node and the range does not contain any
-                // of its character data. See issue 190.
                 var sc = range.startContainer;
                 if (node == sc && isCharacterDataNode(sc) && range.startOffset == sc.length) {
                     return;
@@ -1173,7 +1130,6 @@ var wysihtml5 = {
 
         /*----------------------------------------------------------------------------------------------------------------*/
 
-        // RangeIterator code partially borrows from IERange by Tim Ryan (http://github.com/timcameronryan/IERange)
 
         function RangeIterator(range, clonePartiallySelectedTextNodes) {
             this.range = range;
@@ -1388,10 +1344,6 @@ var wysihtml5 = {
 
         var createContextualFragment = htmlParsingConforms ?
 
-            // Implementation as per HTML parsing spec, trusting in the browser's implementation of innerHTML. See
-            // discussion and base code for this implementation at issue 67.
-            // Spec: http://html5.org/specs/dom-parsing.html#extensions-to-the-range-interface
-            // Thanks to Aleks Williams.
             function(fragmentStr) {
                 // "Let node the context object's start's node."
                 var node = this.startContainer;
@@ -1432,23 +1384,11 @@ var wysihtml5 = {
                     el = el.cloneNode(false);
                 }
 
-                // "If the node's document is an HTML document: Invoke the HTML fragment parsing algorithm."
-                // "If the node's document is an XML document: Invoke the XML fragment parsing algorithm."
-                // "In either case, the algorithm must be invoked with fragment as the input
-                // and element as the context element."
                 el.innerHTML = fragmentStr;
 
-                // "If this raises an exception, then abort these steps. Otherwise, let new
-                // children be the nodes returned."
-
-                // "Let fragment be a new DocumentFragment."
-                // "Append all new children to fragment."
-                // "Return fragment."
                 return dom.fragmentFromNodeChildren(el);
             } :
 
-            // In this case, innerHTML cannot be trusted, so fall back to a simpler, non-conformant implementation that
-            // previous versions of Rangy used (with the exception of using a body element rather than a div)
             function(fragmentStr) {
                 var doc = getRangeDocument(this);
                 var el = doc.createElement("body");
@@ -1519,10 +1459,6 @@ var wysihtml5 = {
                     throw new DOMException("HIERARCHY_REQUEST_ERR");
                 }
 
-                // No check for whether the container of the start of the Range is of a type that does not allow
-                // children of the type of node: the browser's DOM implementation should do this for us when we attempt
-                // to add the node
-
                 var firstNodeInserted = insertNodeAtPosition(node, this.startContainer, this.startOffset);
                 this.setStartBefore(firstNodeInserted);
             },
@@ -1554,8 +1490,6 @@ var wysihtml5 = {
                 assertNodeNotReadOnly(this.startContainer);
                 assertNodeNotReadOnly(this.endContainer);
 
-                // Check if the contents can be surrounded. Specifically, this means whether the range partially selects
-                // no non-text nodes.
                 var iterator = new RangeIterator(this, true);
                 var boundariesInvalid = (iterator._first && (isNonTextPartiallySelected(iterator._first, this)) ||
                         (iterator._last && isNonTextPartiallySelected(iterator._last, this)));
@@ -1616,8 +1550,6 @@ var wysihtml5 = {
                 }
             },
 
-            // The methods below are all non-standard. The following batch were introduced by Mozilla but have since
-            // been removed from Mozilla.
 
             compareNode: function(node) {
                 assertRangeValid(this);
@@ -1658,8 +1590,6 @@ var wysihtml5 = {
                 return rangeToHtml(this);
             },
 
-            // touchingIsIntersecting determines whether this method considers a node that borders a range intersects
-            // with it (as in WebKit) or not (as in Gecko pre-1.9, and the default)
             intersectsNode: function(node, touchingIsIntersecting) {
                 assertRangeValid(this);
                 assertNode(node, "NOT_FOUND_ERR");
@@ -1685,14 +1615,10 @@ var wysihtml5 = {
                        (comparePoints(node, offset, this.endContainer, this.endOffset) <= 0);
             },
 
-            // The methods below are non-standard and invented by me.
-
-            // Sharing a boundary start-to-end or end-to-start does not count as intersection.
             intersectsRange: function(range) {
                 return rangesIntersect(this, range, false);
             },
 
-            // Sharing a boundary start-to-end or end-to-start does count as intersection.
             intersectsOrTouchesRange: function(range) {
                 return rangesIntersect(this, range, true);
             },
@@ -1914,8 +1840,6 @@ var wysihtml5 = {
             function setRangeStart(range, node, offset) {
                 var ec = range.endContainer, eo = range.endOffset;
                 if (node !== range.startContainer || offset !== range.startOffset) {
-                    // Check the root containers of the range and the new boundary, and also check whether the new boundary
-                    // is after the current end. In either case, collapse the range to the new position
                     if (getRootContainer(node) != getRootContainer(ec) || comparePoints(node, offset, ec, eo) == 1) {
                         ec = node;
                         eo = offset;
@@ -1927,8 +1851,6 @@ var wysihtml5 = {
             function setRangeEnd(range, node, offset) {
                 var sc = range.startContainer, so = range.startOffset;
                 if (node !== range.endContainer || offset !== range.endOffset) {
-                    // Check the root containers of the range and the new boundary, and also check whether the new boundary
-                    // is after the current end. In either case, collapse the range to the new position
                     if (getRootContainer(node) != getRootContainer(sc) || comparePoints(node, offset, sc, so) == -1) {
                         sc = node;
                         so = offset;
@@ -1957,14 +1879,7 @@ var wysihtml5 = {
                     setRangeEnd(this, node, offset);
                 },
 
-                /**
-                 * Convenience method to set a range's start and end boundaries. Overloaded as follows:
-                 * - Two parameters (node, offset) creates a collapsed range at that position
-                 * - Three parameters (node, startOffset, endOffset) creates a range contained with node starting at
-                 *   startOffset and ending at endOffset
-                 * - Four parameters (startNode, startOffset, endNode, endOffset) creates a range starting at startOffset in
-                 *   startNode and ending at endOffset in endNode
-                 */
+                
                 setStartAndEnd: function() {
                     var args = arguments;
                     var sc = args[0], so = args[1], ec = sc, eo = so;
@@ -2023,8 +1938,7 @@ var wysihtml5 = {
                     assertNodeNotReadOnly(this.startContainer);
                     assertNodeNotReadOnly(this.endContainer);
 
-                    // Check if the contents can be surrounded. Specifically, this means whether the range partially selects
-                    // no non-text nodes.
+                   
                     var iterator = new RangeIterator(this, true);
                     var boundariesInvalid = (iterator._first && isNonTextPartiallySelected(iterator._first, this) ||
                             (iterator._last && isNonTextPartiallySelected(iterator._last, this)));
@@ -2191,9 +2105,6 @@ var wysihtml5 = {
         /*----------------------------------------------------------------------------------------------------------------*/
 
         if (api.features.implementsDomRange) {
-            // This is a wrapper around the browser's native DOM Range. It has two aims:
-            // - Provide workarounds for specific browser bugs
-            // - provide convenient extensions, which are inherited from Rangy's DomRange
 
             (function() {
                 var rangeProto;
@@ -2244,8 +2155,7 @@ var wysihtml5 = {
                     return this.nativeRange.cloneContents();
                 };
 
-                // Due to a long-standing Firefox bug that I have not been able to find a reliable way to detect,
-                // insertNode() is never delegated to the native range.
+               
 
                 rangeProto.surroundContents = function(node) {
                     this.nativeRange.surroundContents(node);
@@ -2277,8 +2187,6 @@ var wysihtml5 = {
 
                 /*--------------------------------------------------------------------------------------------------------*/
 
-                // Test for Firefox 2 bug that prevents moving the start of a Range to a point after its current end and
-                // correct for it
 
                 range.setStart(testTextNode, 0);
                 range.setEnd(testTextNode, 0);
@@ -2353,9 +2261,6 @@ var wysihtml5 = {
 
                 /*--------------------------------------------------------------------------------------------------------*/
 
-                // Test for and correct WebKit bug that has the behaviour of compareBoundaryPoints round the wrong way for
-                // constants START_TO_END and END_TO_START: https://bugs.webkit.org/show_bug.cgi?id=20738
-
                 range.selectNodeContents(testTextNode);
                 range.setEnd(testTextNode, 3);
 
@@ -2385,7 +2290,6 @@ var wysihtml5 = {
 
                 /*--------------------------------------------------------------------------------------------------------*/
 
-                // Test for IE 9 deleteContents() and extractContents() bug and correct it. See issue 107.
 
                 var el = document.createElement("div");
                 el.innerHTML = "123";
@@ -2398,8 +2302,6 @@ var wysihtml5 = {
                 range.deleteContents();
 
                 if (textNode.data == "13") {
-                    // Behaviour is correct per DOM4 Range so wrap the browser's implementation of deleteContents() and
-                    // extractContents()
                     rangeProto.deleteContents = function() {
                         this.nativeRange.deleteContents();
                         updateRangeProperties(this);
@@ -2416,16 +2318,11 @@ var wysihtml5 = {
                 body.removeChild(el);
                 body = null;
 
-                /*--------------------------------------------------------------------------------------------------------*/
-
-                // Test for existence of createContextualFragment and delegate to it if it exists
                 if (util.isHostMethod(range, "createContextualFragment")) {
                     rangeProto.createContextualFragment = function(fragmentStr) {
                         return this.nativeRange.createContextualFragment(fragmentStr);
                     };
                 }
-
-                /*--------------------------------------------------------------------------------------------------------*/
 
                 // Clean up
                 getBody(document).removeChild(testTextNode);
@@ -2444,20 +2341,7 @@ var wysihtml5 = {
         }
         
         if (api.features.implementsTextRange) {
-            /*
-            This is a workaround for a bug where IE returns the wrong container element from the TextRange's parentElement()
-            method. For example, in the following (where pipes denote the selection boundaries):
-
-            <ul id="ul"><li id="a">| a </li><li id="b"> b |</li></ul>
-
-            var range = document.selection.createRange();
-            alert(range.parentElement().id); // Should alert "ul" but alerts "b"
-
-            This method returns the common ancestor node of the following:
-            - the parentElement() of the textRange
-            - the parentElement() of the textRange after calling collapse(true)
-            - the parentElement() of the textRange after calling collapse(false)
-            */
+            
             var getTextRangeContainerElement = function(textRange) {
                 var parentEl = textRange.parentElement();
                 var range = textRange.duplicate();
@@ -2475,24 +2359,19 @@ var wysihtml5 = {
                 return textRange.compareEndPoints("StartToEnd", textRange) == 0;
             };
 
-            // Gets the boundary of a TextRange expressed as a node and an offset within that node. This function started
-            // out as an improved version of code found in Tim Cameron Ryan's IERange (http://code.google.com/p/ierange/)
-            // but has grown, fixing problems with line breaks in preformatted text, adding workaround for IE TextRange
-            // bugs, handling for inputs and images, plus optimizations.
+           
             var getTextRangeBoundaryPosition = function(textRange, wholeRangeContainerElement, isStart, isCollapsed, startInfo) {
                 var workingRange = textRange.duplicate();
                 workingRange.collapse(isStart);
                 var containerElement = workingRange.parentElement();
 
-                // Sometimes collapsing a TextRange that's at the start of a text node can move it into the previous node, so
-                // check for that
+                
                 if (!dom.isOrIsAncestorOf(wholeRangeContainerElement, containerElement)) {
                     containerElement = wholeRangeContainerElement;
                 }
 
 
-                // Deal with nodes that cannot "contain rich HTML markup". In practice, this means form inputs, images and
-                // similar. See http://msdn.microsoft.com/en-us/library/aa703950%28VS.85%29.aspx
+               
                 if (!containerElement.canHaveHTML) {
                     var pos = new DomPosition(containerElement.parentNode, dom.getNodeIndex(containerElement));
                     return {
@@ -2506,8 +2385,7 @@ var wysihtml5 = {
 
                 var workingNode = dom.getDocument(containerElement).createElement("span");
 
-                // Workaround for HTML5 Shiv's insane violation of document.createElement(). See Rangy issue 104 and HTML5
-                // Shiv issue 64: https://github.com/aFarkas/html5shiv/issues/64
+                
                 if (workingNode.parentNode) {
                     workingNode.parentNode.removeChild(workingNode);
                 }
@@ -2518,8 +2396,7 @@ var wysihtml5 = {
                 var childNodeCount = containerElement.childNodes.length;
                 var end = childNodeCount;
 
-                // Check end first. Code within the loop assumes that the endth child node of the container is definitely
-                // after the range boundary.
+                
                 var nodeIndex = end;
 
                 while (true) {
@@ -2547,49 +2424,17 @@ var wysihtml5 = {
                 }
 
 
-                // We've now reached or gone past the boundary of the text range we're interested in
-                // so have identified the node we want
+                
                 boundaryNode = workingNode.nextSibling;
 
                 if (comparison == -1 && boundaryNode && isCharacterDataNode(boundaryNode)) {
-                    // This is a character data node (text, comment, cdata). The working range is collapsed at the start of
-                    // the node containing the text range's boundary, so we move the end of the working range to the
-                    // boundary point and measure the length of its text to get the boundary's offset within the node.
+                   
                     workingRange.setEndPoint(isStart ? "EndToStart" : "EndToEnd", textRange);
 
                     var offset;
 
                     if (/[\r\n]/.test(boundaryNode.data)) {
-                        /*
-                        For the particular case of a boundary within a text node containing rendered line breaks (within a
-                        <pre> element, for example), we need a slightly complicated approach to get the boundary's offset in
-                        IE. The facts:
-                        
-                        - Each line break is represented as \r in the text node's data/nodeValue properties
-                        - Each line break is represented as \r\n in the TextRange's 'text' property
-                        - The 'text' property of the TextRange does not contain trailing line breaks
-                        
-                        To get round the problem presented by the final fact above, we can use the fact that TextRange's
-                        moveStart() and moveEnd() methods return the actual number of characters moved, which is not
-                        necessarily the same as the number of characters it was instructed to move. The simplest approach is
-                        to use this to store the characters moved when moving both the start and end of the range to the
-                        start of the document body and subtracting the start offset from the end offset (the
-                        "move-negative-gazillion" method). However, this is extremely slow when the document is large and
-                        the range is near the end of it. Clearly doing the mirror image (i.e. moving the range boundaries to
-                        the end of the document) has the same problem.
-                        
-                        Another approach that works is to use moveStart() to move the start boundary of the range up to the
-                        end boundary one character at a time and incrementing a counter with the value returned by the
-                        moveStart() call. However, the check for whether the start boundary has reached the end boundary is
-                        expensive, so this method is slow (although unlike "move-negative-gazillion" is largely unaffected
-                        by the location of the range within the document).
-                        
-                        The approach used below is a hybrid of the two methods above. It uses the fact that a string
-                        containing the TextRange's 'text' property with each \r\n converted to a single \r character cannot
-                        be longer than the text of the TextRange, so the start of the range is moved that length initially
-                        and then a character at a time to make up for any trailing line breaks not contained in the 'text'
-                        property. This has good performance in most situations compared to the previous two methods.
-                        */
+                       
                         var tempRange = workingRange.duplicate();
                         var rangeLength = tempRange.text.replace(/\r\n/g, "\r").length;
 
@@ -2604,8 +2449,7 @@ var wysihtml5 = {
                     boundaryPosition = new DomPosition(boundaryNode, offset);
                 } else {
 
-                    // If the boundary immediately follows a character data node and this is the end boundary, we should favour
-                    // a position within that, and likewise for a start boundary preceding a character data node
+                    
                     previousNode = (isCollapsed || !isStart) && workingNode.previousSibling;
                     nextNode = (isCollapsed || isStart) && workingNode.nextSibling;
                     if (nextNode && isCharacterDataNode(nextNode)) {
@@ -2629,9 +2473,7 @@ var wysihtml5 = {
                 };
             };
 
-            // Returns a TextRange representing the boundary of a TextRange expressed as a node and an offset within that
-            // node. This function started out as an optimized version of code found in Tim Cameron Ryan's IERange
-            // (http://code.google.com/p/ierange/)
+            
             var createBoundaryTextRange = function(boundaryPosition, isStart) {
                 var boundaryNode, boundaryParent, boundaryOffset = boundaryPosition.offset;
                 var doc = dom.getDocument(boundaryPosition.node);
@@ -2647,15 +2489,10 @@ var wysihtml5 = {
                     boundaryParent = boundaryPosition.node;
                 }
 
-                // Position the range immediately before the node containing the boundary
                 workingNode = doc.createElement("span");
 
-                // Making the working element non-empty element persuades IE to consider the TextRange boundary to be within
-                // the element rather than immediately before or after it
                 workingNode.innerHTML = "&#feff;";
 
-                // insertBefore is supposed to work like appendChild if the second parameter is null. However, a bug report
-                // for IERange suggests that it can crash the browser: http://code.google.com/p/ierange/issues/detail?id=12
                 if (boundaryNode) {
                     boundaryParent.insertBefore(workingNode, boundaryNode);
                 } else {
@@ -2678,8 +2515,6 @@ var wysihtml5 = {
 
             /*------------------------------------------------------------------------------------------------------------*/
 
-            // This is a wrapper around a TextRange, providing full DOM Range functionality using rangy's DomRange as a
-            // prototype
 
             WrappedTextRange = function(textRange) {
                 this.textRange = textRange;
@@ -2691,7 +2526,6 @@ var wysihtml5 = {
             WrappedTextRange.prototype.refresh = function() {
                 var start, end, startBoundary;
 
-                // TextRange's parentElement() method cannot be trusted. getTextRangeContainerElement() works around that.
                 var rangeContainerElement = getTextRangeContainerElement(this.textRange);
 
                 if (textRangeIsCollapsed(this.textRange)) {
@@ -2701,9 +2535,6 @@ var wysihtml5 = {
                     startBoundary = getTextRangeBoundaryPosition(this.textRange, rangeContainerElement, true, false);
                     start = startBoundary.boundaryPosition;
 
-                    // An optimization used here is that if the start and end boundaries have the same parent element, the
-                    // search scope for the end boundary can be limited to exclude the portion of the element that precedes
-                    // the start boundary
                     end = getTextRangeBoundaryPosition(this.textRange, rangeContainerElement, false, false,
                         startBoundary.nodeInfo).boundaryPosition;
                 }
@@ -2739,10 +2570,7 @@ var wysihtml5 = {
 
             api.WrappedTextRange = WrappedTextRange;
 
-            // IE 9 and above have both implementations and Rangy makes both available. The next few lines sets which
-            // implementation to use by default.
             if (!api.features.implementsDomRange || api.config.preferTextRange) {
-                // Add WrappedTextRange as the Range property of the global object to allow expression like Range.END_TO_END to work
                 var globalObj = (function() { return this; })();
                 if (typeof globalObj.Range == "undefined") {
                     globalObj.Range = WrappedTextRange;
@@ -2788,10 +2616,6 @@ var wysihtml5 = {
         });
     });
 
-    /*----------------------------------------------------------------------------------------------------------------*/
-
-    // This module creates a selection object wrapper that conforms as closely as possible to the Selection specification
-    // in the HTML Editing spec (http://dvcs.w3.org/hg/editing/raw-file/tip/editing.html#selections)
     api.createCoreModule("WrappedSelection", ["DomRange", "WrappedRange"], function(api, module) {
         api.config.checkSelectionRanges = true;
 
@@ -2813,8 +2637,6 @@ var wysihtml5 = {
         var rangesEqual = DomRange.rangesEqual;
 
 
-        // Utility function to support direction parameters in the API that may be a string ("backward" or "forward") or a
-        // Boolean (true for backwards).
         function isDirectionBackward(dir) {
             return (typeof dir == "string") ? /^backward(s)?$/i.test(dir) : !!dir;
         }
@@ -2848,8 +2670,6 @@ var wysihtml5 = {
             return backward;
         }
 
-        // Test for the Range/TextRange and Selection features required
-        // Test for ability to retrieve selection
         var implementsWinGetSelection = isHostMethod(window, "getSelection"),
             implementsDocSelection = util.isHostObject(document, "selection");
 
@@ -2863,7 +2683,6 @@ var wysihtml5 = {
             api.isSelectionValid = function(winParam) {
                 var doc = getWindow(winParam, "isSelectionValid").document, nativeSel = doc.selection;
 
-                // Check whether the selection TextRange is actually contained within the correct document
                 return (nativeSel.type != "None" || getDocument(nativeSel.createRange().parentElement()) == doc);
             };
         } else if (implementsWinGetSelection) {
@@ -2911,13 +2730,7 @@ var wysihtml5 = {
                 typeof testSelection.rangeCount == NUMBER && features.implementsDomRange) {
 
             (function() {
-                // Previously an iframe was used but this caused problems in some circumstances in IE, so tests are
-                // performed on the current document's selection. See issue 109.
-
-                // Note also that if a selection previously existed, it is wiped by these tests. This should usually be fine
-                // because initialization usually happens when the document loads, but could be a problem for a script that
-                // loads and initializes Rangy later. If anyone complains, code could be added to save and restore the
-                // selection.
+               
                 var sel = window.getSelection();
                 if (sel) {
                     // Store the current selection
@@ -2946,11 +2759,7 @@ var wysihtml5 = {
 
                     // Test whether the native selection is capable of supporting multiple ranges.
                     if (!selectionHasMultipleRanges) {
-                        // Doing the original feature test here in Chrome 36 (and presumably later versions) prints a
-                        // console error of "Discontiguous selection is not supported." that cannot be suppressed. There's
-                        // nothing we can do about this while retaining the feature test so we have to resort to a browser
-                        // sniff. I'm not happy about it. See
-                        // https://code.google.com/p/chromium/issues/detail?id=399791
+                       
                         var chromeMatch = window.navigator.appVersion.match(/Chrome\/(.*?) /);
                         if (chromeMatch && parseInt(chromeMatch[1]) >= 36) {
                             selectionSupportsMultipleRanges = false;
@@ -3091,9 +2900,7 @@ var wysihtml5 = {
             } else {
                 var controlRange = sel.docSelection.createRange();
                 if (isTextRange(controlRange)) {
-                    // This case (where the selection type is "Control" and calling createRange() on the selection returns
-                    // a TextRange) can happen in IE 9. It happens, for example, when all elements in the selected
-                    // ControlRange have been removed from the ControlRange and removed from the document.
+                   
                     updateFromTextRange(sel, controlRange);
                 } else {
                     sel.rangeCount = controlRange.length;
@@ -3113,8 +2920,6 @@ var wysihtml5 = {
             var controlRange = sel.docSelection.createRange();
             var rangeElement = getSingleElementFromRange(range);
 
-            // Create a new ControlRange containing all the elements in the selected ControlRange plus the element
-            // contained by the supplied range
             var doc = getDocument(controlRange.item(0));
             var newControlRange = getBody(doc).createControlRange();
             for (var i = 0, len = controlRange.length; i < len; ++i) {
@@ -3134,9 +2939,6 @@ var wysihtml5 = {
         var getSelectionRangeAt;
 
         if (isHostMethod(testSelection, "getRangeAt")) {
-            // try/catch is present because getRangeAt() must have thrown an error in some browser and some situation.
-            // Unfortunately, I didn't write a comment about the specifics and am now scared to take it out. Let that be a
-            // lesson to us all, especially me.
             getSelectionRangeAt = function(sel, index) {
                 try {
                     return sel.getRangeAt(index);
@@ -3150,7 +2952,6 @@ var wysihtml5 = {
                 var range = api.createRange(doc);
                 range.setStartAndEnd(sel.anchorNode, sel.anchorOffset, sel.focusNode, sel.focusOffset);
 
-                // Handle the case when the selection was selected backwards (from the end to the start in the
                 // document)
                 if (range.collapsed !== this.isCollapsed) {
                     range.setStartAndEnd(sel.focusNode, sel.focusOffset, sel.anchorNode, sel.anchorOffset);
@@ -3276,23 +3077,15 @@ var wysihtml5 = {
                                 this.removeAllRanges();
                                 previousRangeCount = 0;
                             }
-                            // Clone the native range so that changing the selected range does not affect the selection.
-                            // This is contrary to the spec but is the only way to achieve consistency between browsers. See
-                            // issue 80.
                             this.nativeSelection.addRange(getNativeRange(range).cloneRange());
 
                             // Check whether adding the range was successful
                             this.rangeCount = this.nativeSelection.rangeCount;
 
                             if (this.rangeCount == previousRangeCount + 1) {
-                                // The range was added successfully
-
-                                // Check whether the range that we added to the selection is reflected in the last range extracted from
-                                // the selection
                                 if (api.config.checkSelectionRanges) {
                                     var nativeRange = getSelectionRangeAt(this.nativeSelection, this.rangeCount - 1);
                                     if (nativeRange && !rangesEqual(nativeRange, range)) {
-                                        // Happens in WebKit with, for example, a selection placed at the start of a text node
                                         range = new WrappedRange(nativeRange);
                                     }
                                 }
@@ -3300,7 +3093,6 @@ var wysihtml5 = {
                                 updateAnchorAndFocusFromRange(this, range, selectionIsBackward(this.nativeSelection));
                                 this.isCollapsed = selectionIsCollapsed(this);
                             } else {
-                                // The range was not added successfully. The simplest thing is to refresh
                                 this.refresh();
                             }
                         }
@@ -3337,8 +3129,6 @@ var wysihtml5 = {
 
                     // Check for empty() not working (issue #24)
                     if (this.docSelection.type != "None") {
-                        // Work around failure to empty a control selection by instead selecting a TextRange and then
-                        // calling empty()
                         var doc;
                         if (this.anchorNode) {
                             doc = getDocument(this.anchorNode);
@@ -3460,8 +3250,6 @@ var wysihtml5 = {
                     return true;
                 }
 
-                // Now check the direction. Checking the anchor position is the same is enough since we're checking all the
-                // ranges after this
                 if (this.anchorNode != oldAnchorNode || this.anchorOffset != oldAnchorOffset) {
                     return true;
                 }
@@ -3476,7 +3264,6 @@ var wysihtml5 = {
             }
         };
 
-        // Removal of a single range
         var removeRangeManually = function(sel, range) {
             var ranges = sel.getAllRanges();
             sel.removeAllRanges();
@@ -3496,8 +3283,6 @@ var wysihtml5 = {
                     var controlRange = this.docSelection.createRange();
                     var rangeElement = getSingleElementFromRange(range);
 
-                    // Create a new ControlRange containing all the elements in the selected ControlRange minus the
-                    // element contained by the supplied range
                     var doc = getDocument(controlRange.item(0));
                     var newControlRange = getBody(doc).createControlRange();
                     var el, removed = false;
@@ -3540,9 +3325,6 @@ var wysihtml5 = {
         // Create an alias for backwards compatibility. From 1.3, everything is "backward" rather than "backwards"
         selProto.isBackwards = selProto.isBackward;
 
-        // Selection stringifier
-        // This is conformant to the old HTML5 selections draft spec but differs from WebKit and Mozilla's implementation.
-        // The current spec does not yet define this method.
         selProto.toString = function() {
             var rangeTexts = [];
             for (var i = 0, len = this.rangeCount; i < len; ++i) {
@@ -3584,8 +3366,6 @@ var wysihtml5 = {
             }
         };
 
-        // The spec is very specific on how selectAllChildren should be implemented so the native implementation is
-        // never used by Rangy.
         selProto.selectAllChildren = function(node) {
             assertNodeInSameDocument(this, node);
             var range = api.createRange(node);
@@ -3611,14 +3391,11 @@ var wysihtml5 = {
                     for (var i = 0, len = ranges.length; i < len; ++i) {
                         ranges[i].deleteContents();
                     }
-                    // The spec says nothing about what the selection should contain after calling deleteContents on each
-                    // range. Firefox moves the selection to where the final selected range was, so we emulate that
                     this.addRange(ranges[len - 1]);
                 }
             }
         };
 
-        // The following are non-standard extensions
         selProto.eachRange = function(func, returnValue) {
             for (var i = 0, len = this._ranges.length; i < len; ++i) {
                 if ( func( this.getRangeAt(i) ) ) {
@@ -3793,20 +3570,7 @@ var wysihtml5 = {
     /*----------------------------------------------------------------------------------------------------------------*/
 
     return api;
-}, this);;/**
- * Selection save and restore module for Rangy.
- * Saves and restores user selections using marker invisible elements in the DOM.
- *
- * Part of Rangy, a cross-browser JavaScript range and selection library
- * http://code.google.com/p/rangy/
- *
- * Depends on Rangy core.
- *
- * Copyright 2014, Tim Down
- * Licensed under the MIT license.
- * Version: 1.3alpha.20140804
- * Build date: 4 August 2014
- */
+}, this);;
 (function(factory, global) {
     if (typeof define == "function" && define.amd) {
         // AMD. Register as an anonymous module with a dependency on Rangy.
@@ -7575,7 +7339,6 @@ wysihtml5.dom.isLoadedImage = function (node) {
             return frag;
         },
 
-        // Returns next real cell (not part of spanned cell unless first) on row if selected index is not real. I no real cells -1 will be returned
         correctColIndexForUnreals: function(col, row) {
             var r = this.map[row],
                 corrIdx = -1;
@@ -7883,9 +7646,6 @@ wysihtml5.dom.isLoadedImage = function (node) {
             }
         },
 
-        // Removes a cell when removing a row
-        // If is rowspan cell then decreases the rowspan
-        // and moves cell to next row if needed (is first cell of rowspan)
         removeRowCell: function(cell) {
             if (cell.isReal) {
                if (cell.isRowspan) {
@@ -8238,7 +7998,6 @@ wysihtml5.dom.query = function(elements, query) {
     };
   } else {
     return function( container, element ) {
-      // implementation borrowed from https://github.com/tmpvar/jsdom/blob/681a8524b663281a0f58348c6129c8c184efc62c/lib/jsdom/level3/core.js // MIT license
       var thisOwner, otherOwner;
 
       if( container.nodeType === 9) // Node.DOCUMENT_NODE
@@ -8440,15 +8199,7 @@ wysihtml5.quirks.ensureProperClearing = (function() {
     wysihtml5.dom.observe(composer.element, ["cut", "keydown"], clearIfNecessary);
   };
 })();
-;// See https://bugzilla.mozilla.org/show_bug.cgi?id=664398
-//
-// In Firefox this:
-//      var d = document.createElement("div");
-//      d.innerHTML ='<a href="~"></a>';
-//      d.innerHTML;
-// will result in:
-//      <a href="%7E"></a>
-// which is wrong
+;
 (function(wysihtml5) {
   var TILDE_ESCAPED = "%7E";
   wysihtml5.quirks.getCorrectInnerHTML = function(element) {

@@ -1,11 +1,4 @@
-/* PushMenu()
- * ==========
- * Adds the push menu functionality to the sidebar.
- *
- * @usage: $('.btn').pushMenu(options)
- *          or add [data-toggle="push-menu"] to any button
- *          Pass any option as data-option="value"
- */
+
 +function ($) {
   'use strict'
 

@@ -1,35 +1,3 @@
-/*! =========================================================
- * bootstrap-slider.js
- *
- * Maintainers:
- *		Kyle Kemp
- *			- Twitter: @seiyria
- *			- Github:  seiyria
- *		Rohit Kalkur
- *			- Twitter: @Rovolutionary
- *			- Github:  rovolution
- *
- * =========================================================
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * ========================================================= */
-
-
-/**
- * Bridget makes jQuery widgets
- * v1.0.1
- * MIT license
- */
 
 (function(root, factory) {
 	if(typeof define === "function" && define.amd) {
@@ -97,8 +65,6 @@
 
 			// -------------------------- plugin bridge -------------------------- //
 
-			// helper function for logging errors
-			// $.error breaks jQuery chaining
 			var logError = typeof console === 'undefined' ? noop :
 			  function( message ) {
 			    console.error( message );
@@ -351,12 +317,6 @@
 				this.options[optName] = val;
 			}
 
-			/*
-				Validate `tooltip_position` against 'orientation`
-				- if `tooltip_position` is incompatible with orientation, swith it to a default compatible with specified `orientation`
-					-- default for "vertical" -> "right"
-					-- default for "horizontal" -> "left"
-			*/
 			if(this.options.orientation === "vertical" && (this.options.tooltip_position === "top" || this.options.tooltip_position === "bottom")) {
 
 				this.options.tooltip_position	= "right";

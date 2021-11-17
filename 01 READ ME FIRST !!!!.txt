@@ -1,7 +1,7 @@
 
 FOR ADMIN'S LOGIN
 
-  username = admin
+  username = ly3012
   password = password
 
 For Employee's Login, Go to Admin Panel and Add or View Employee's List

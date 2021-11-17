@@ -1,11 +1,4 @@
-/* ControlSidebar()
- * ===============
- * Toggles the state of the control sidebar
- *
- * @Usage: $('#control-sidebar-trigger').controlSidebar(options)
- *         or add [data-toggle="control-sidebar"] to the trigger
- *         Pass any option as data-option="value"
- */
+
 +function ($) {
   'use strict'
 

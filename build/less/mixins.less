@@ -1,5 +1,3 @@
-//AdminLTE mixins
-//===============
 
 //Changes the color and the hovering properties of the navbar
 .navbar-variant(@color; @font-color: rgba(255, 255, 255, 0.8); @hover-color: #f6f6f6; @hover-bg: rgba(0, 0, 0, 0.1)) {
@@ -275,15 +273,14 @@
   //The sidebar search form
   .sidebar-form {
     .border-radius(3px);
-    border: 1px solid @gray-lte;  //darken(@sidebar-light-bg, 5%);
+    border: 1px solid @gray-lte;  
     margin: 10px 10px;
     input[type="text"],
     .btn {
       box-shadow: none;
-      background-color: #fff; //darken(@sidebar-light-bg, 3%);
+      background-color: #fff; 
       border: 1px solid transparent;
       height: 35px;
-      //.transition(all @transition-speed @transition-fn);
     }
     input[type="text"] {
       color: #666;

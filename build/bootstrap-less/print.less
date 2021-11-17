@@ -1,16 +1,9 @@
-/*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
-
-// ==========================================================================
-// Print styles.
-// Inlined to avoid the additional HTTP request: h5bp.com/r
-// ==========================================================================
-
 @media print {
     *,
     *:before,
     *:after {
         background: transparent !important;
-        color: #000 !important; // Black prints faster: h5bp.com/s
+        color: #000 !important; 
         box-shadow: none !important;
         text-shadow: none !important;
     }
@@ -28,8 +21,6 @@
         content: " (" attr(title) ")";
     }
 
-    // Don't show links that are fragment identifiers,
-    // or use the `javascript:` pseudo protocol
     a[href^="#"]:after,
     a[href^="javascript:"]:after {
         content: "";
@@ -42,7 +33,7 @@
     }
 
     thead {
-        display: table-header-group; // h5bp.com/t
+        display: table-header-group; 
     }
 
     tr,
@@ -66,9 +57,7 @@
         page-break-after: avoid;
     }
 
-    // Bootstrap specific changes start
-
-    // Bootstrap components
+    
     .navbar {
         display: none;
     }
@@ -97,5 +86,4 @@
         }
     }
 
-    // Bootstrap specific changes end
 }

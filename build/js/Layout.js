@@ -1,12 +1,3 @@
-/* Layout()
- * ========
- * Implements AdminLTE layout.
- * Fixes the layout height in case min-height fails.
- *
- * @usage activated automatically upon window load.
- *        Configure any options by passing data-option="value"
- *        to the body tag.
- */
 +function ($) {
   'use strict'
 

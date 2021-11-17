@@ -1,12 +1,3 @@
-/*!
- * Bootstrap v3.3.7 (http://getbootstrap.com)
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- */
-
-//
-// Load core variables and mixins
-// --------------------------------------------------
 
 @import "variables.less";
 @import "mixins.less";
@@ -47,7 +38,7 @@
 // Mixin for generating new styles
 .btn-styles(@btn-color: #555) {
   #gradient > .vertical(@start-color: @btn-color; @end-color: darken(@btn-color, 12%));
-  .reset-filter(); // Disable gradients for IE9 because filter bleeds through rounded corners; see https://github.com/twbs/bootstrap/issues/10620
+  .reset-filter(); 
   background-repeat: repeat-x;
   border-color: darken(@btn-color, 14%);
 
@@ -130,7 +121,7 @@
 // Default navbar
 .navbar-default {
   #gradient > .vertical(@start-color: lighten(@navbar-default-bg, 10%); @end-color: @navbar-default-bg);
-  .reset-filter(); // Remove gradient in IE<10 to fix bug where dropdowns don't get triggered
+  .reset-filter(); 
   border-radius: @navbar-border-radius;
   @shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 1px 5px rgba(0,0,0,.075);
   .box-shadow(@shadow);
@@ -149,7 +140,7 @@
 // Inverted navbar
 .navbar-inverse {
   #gradient > .vertical(@start-color: lighten(@navbar-inverse-bg, 10%); @end-color: @navbar-inverse-bg);
-  .reset-filter(); // Remove gradient in IE<10 to fix bug where dropdowns don't get triggered; see https://github.com/twbs/bootstrap/issues/10257
+  .reset-filter(); 
   border-radius: @navbar-border-radius;
   .navbar-nav > .open > a,
   .navbar-nav > .active > a {
@@ -183,9 +174,6 @@
 }
 
 
-//
-// Alerts
-// --------------------------------------------------
 
 // Common styles
 .alert {
@@ -207,9 +195,6 @@
 .alert-danger     { .alert-styles(@alert-danger-bg); }
 
 
-//
-// Progress bars
-// --------------------------------------------------
 
 // Give the progress background some depth
 .progress {
@@ -228,8 +213,6 @@
 .progress-bar-warning    { .progress-bar-styles(@progress-bar-warning-bg); }
 .progress-bar-danger     { .progress-bar-styles(@progress-bar-danger-bg); }
 
-// Reset the striped class because our mixins don't do multiple gradients and
-// the above custom styles override the new `.progress-bar-striped` in v3.2.0.
 .progress-bar-striped {
   #gradient > .striped();
 }
@@ -256,9 +239,6 @@
 }
 
 
-//
-// Panels
-// --------------------------------------------------
 
 // Common styles
 .panel {

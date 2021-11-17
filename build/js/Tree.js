@@ -1,12 +1,3 @@
-/* Tree()
- * ======
- * Converts a nested list into a multilevel
- * tree view menu.
- *
- * @Usage: $('.my-menu').tree(options)
- *         or add [data-widget="tree"] to the ul element
- *         Pass any option as data-option="value"
- */
 +function ($) {
   'use strict'
 

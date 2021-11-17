@@ -1,10 +1,4 @@
-/* DirectChat()
- * ===============
- * Toggles the state of the control sidebar
- *
- * @Usage: $('#my-chat-box').directChat()
- *         or add [data-widget="direct-chat"] to the trigger
- */
+
 +function ($) {
   'use strict'
 
